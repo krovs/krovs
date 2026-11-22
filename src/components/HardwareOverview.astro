@@ -15,11 +15,11 @@ const details: Record<string, string[]> = {
 const detailsOf = (id: string) => details[id]?.join("|");
 ---
 <figure class="homelab-scene" aria-label="Homelab devices in a shelving unit">
-  <svg viewBox="50 105 805 305" role="group" aria-label="Illustration of the homelab">
+  <svg viewBox="100 80 764 330" data-narrow data-narrow-viewbox="84 -12 560 412" role="group" aria-label="Illustration of the homelab">
     <desc>A shelving unit with a router, NUC, Raspberry Pi, NAS, Hue Bridge and switch. An access point sits on top, with the VPS shown in a cloud.</desc>
 
     <!-- VPS: an illustrative cloud, not a physical device in the room. -->
-    <g class="scene-device" data-scene-device="vps" data-details={detailsOf("vps")} data-hardware-check="vps" data-hardware-label="vps" data-status="unknown" role="img" aria-label="vps: unknown" tabindex="0" transform="translate(120 115)">
+    <g class="scene-device" data-scene-device="vps" data-details={detailsOf("vps")} data-hardware-check="vps" data-hardware-label="vps" data-status="unknown" role="img" aria-label="vps: unknown" tabindex="0" transform="translate(180 85)" data-narrow data-narrow-transform="translate(-243 -25)">
       <path class="scene-cloud" d="M502 83h132a25 25 0 0 0 0-50 35 35 0 0 0-64-10 29 29 0 0 0-53 11 25 25 0 0 0-15 49Z" />
       <path d="M552 39h42v14h-42zm0 18h42v14h-42zM557 46h4m4 0h4M557 64h4m4 0h4m10 0h8" />
       <rect class="scene-led scene-led-secondary" x="576" y="43" width="5" height="5" />
@@ -41,7 +41,7 @@ const detailsOf = (id: string) => details[id]?.join("|");
 
     <g class="scene-connections" aria-hidden="true">
       <path class="scene-cable" data-connects="fiber router" data-uplink="fiber" d="M583 325V338H570V345H545V185H224V206" />
-      <path class="scene-cable scene-cable-tailnet" data-connects="router vps" data-uplink="vps" d="M242 206V190H460V155H612" />
+      <path class="scene-cable scene-cable-tailnet" data-connects="router vps" data-uplink="vps" d="M242 206V190H460V125H672" data-narrow data-narrow-d="M242 206V95H330V58" />
       <path class="scene-cable" data-connects="router switch" d="M224 250V278H410V324" />
       <path class="scene-cable" data-connects="nas switch" d="M363 342H355V315H285V342H277" />
       <path class="scene-cable" data-connects="hue switch" d="M342 348H350V324H363" />
@@ -49,7 +49,7 @@ const detailsOf = (id: string) => details[id]?.join("|");
       <path class="scene-cable" data-connects="pi switch" d="M458 250V297H430V324" />
       <path class="scene-cable" data-connects="access-point switch" d="M330 159V185H500V297H475V324" />
     </g>
-    <text class="scene-tailnet-label" data-scene-label="router vps" x="550" y="145" aria-hidden="true">tailnet</text>
+    <text class="scene-tailnet-label" data-scene-label="router vps" x="580" y="115" data-narrow data-narrow-x="286" data-narrow-y="84" aria-hidden="true">tailnet</text>
     <g class="scene-traffic" aria-hidden="true"></g>
 
     <!-- Devices placed on top. -->
@@ -108,7 +108,7 @@ const detailsOf = (id: string) => details[id]?.join("|");
       {[383, 399, 415, 431, 447, 463, 479, 495].map((x) => <rect class="scene-port-led" data-switch-port-led x={x} y="314" width="3" height="3" />)}
     </g>
     <g class="scene-labels" aria-hidden="true">
-      <text class="scene-label" data-scene-label="vps" x="693" y="213">vps</text>
+      <text class="scene-label" data-scene-label="vps" x="753" y="183" data-narrow data-narrow-x="455" data-narrow-y="33">vps</text>
       <text class="scene-label" data-scene-label="access-point" x="330" y="118">access point</text>
       <text class="scene-label" data-scene-label="router" x="194" y="197">router</text>
       <text class="scene-label" data-scene-label="nuc" x="352" y="201">nuc</text>

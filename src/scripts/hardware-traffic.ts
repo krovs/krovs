@@ -1,5 +1,5 @@
 import { REFERENCE_WIDTH, TRAFFIC_SPEED } from '../diagrams/traffic.mjs';
-import { STATUS_EVENT, animateDot, createDot, createScheduler, pick, random, reducedMotion } from './lib/animation';
+import { LAYOUT_EVENT, STATUS_EVENT, animateDot, createDot, createScheduler, pick, random, reducedMotion } from './lib/animation';
 
 let stopTraffic = () => {};
 
@@ -42,6 +42,7 @@ function startTraffic() {
 
 document.addEventListener('astro:page-load', startTraffic);
 document.addEventListener(STATUS_EVENT, startTraffic);
+document.addEventListener(LAYOUT_EVENT, startTraffic);
 document.addEventListener('astro:before-swap', () => stopTraffic());
 document.addEventListener('visibilitychange', startTraffic);
 reducedMotion.addEventListener('change', startTraffic);

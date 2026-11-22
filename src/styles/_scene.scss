@@ -18,7 +18,7 @@
 .scene-labels { pointer-events: none; }
 .scene-label { opacity: 0; fill: var(--text-color); stroke: var(--bg-color); stroke-width: 5px; stroke-linejoin: round; paint-order: stroke fill; text-anchor: middle; font: bold 12px var(--font-mono); transition: opacity .2s ease; }
 .scene-label.is-highlighted { opacity: 1; }
-.scene-details { position: absolute; top: 44%; left: min(80%, calc(100% - 9rem)); right: 0; padding: .4rem .5rem .2rem; border: 1px dashed var(--grey-light); color: var(--text-color); font: .72rem/1.2 var(--font-mono); pointer-events: none; }
+.scene-details { position: absolute; top: 44%; left: min(73%, calc(100% - 11rem)); right: 2%; padding: .4rem .5rem .2rem; border: 1px dashed var(--grey-light); color: var(--text-color); font: .72rem/1.2 var(--font-mono); pointer-events: none; }
 .scene-details-title { width: max-content; max-width: 100%; margin: 0; color: var(--accent-secondary); }
 .scene-details[hidden] { display: none; }
 .scene-details ul { margin: 0; padding: 0; list-style: none; }
@@ -62,8 +62,11 @@
 .scene-device[data-status="offline"] .scene-led { fill: none; stroke: var(--grey-light); opacity: .35; }
 @media (max-width: 520px) {
   .scene-device text { font-size: 13px; }
+  .scene-label { font-size: 15px; }
+  .scene-tailnet-label { font-size: 13px; }
   /* On touch screens the details read as command output under the drawing. */
-  .scene-details { position: static; width: max-content; max-width: 100%; margin: .75rem 0 0; padding: .4rem .6rem .3rem; font-size: .8rem; }
+  .scene-details { position: static; margin: .75rem 0 0; padding: .4rem .6rem .3rem; font-size: .8rem; }
+  .scene-details ul { display: flex; flex-wrap: wrap; gap: 0 1.5ch; }
   .scene-details[hidden] { display: block; border-width: 0; padding-inline: 0; }
   .scene-details[hidden]::before { content: "# tap a device for details"; color: var(--grey-light); }
 }

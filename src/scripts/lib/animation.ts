@@ -3,6 +3,9 @@ export const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 /** Fired on document whenever healthcheck statuses are (re)applied to the page. */
 export const STATUS_EVENT = 'homelab:status-change';
 
+/** Fired when the drawing switches between its wide and narrow (phone) layout. */
+export const LAYOUT_EVENT = 'homelab:layout-change';
+
 export const random = (min: number, max: number) => min + Math.random() * (max - min);
 export const pick = <T>(items: readonly T[]) => items[Math.floor(Math.random() * items.length)];
 
