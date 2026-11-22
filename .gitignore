@@ -2,7 +2,7 @@ node_modules
 dist
 .env
 .astro
-.pnpm-store
 
 .agents
 skills-lock.json
+.pnpm-store

@@ -7,8 +7,10 @@ function storedTheme(): Theme {
   catch { return 'dark'; }
 }
 
-// The sun/moon icon follows html[data-theme] in CSS; only the logo video needs swapping.
+// The sun/moon icon follows html[data-theme] in CSS; the logo video and browser UI colour need JS.
 function render(theme: Theme) {
+  const background = getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim();
+  if (background) document.querySelector('meta[name="theme-color"]')?.setAttribute('content', background);
   const logo = document.querySelector<HTMLVideoElement>('#logo-video');
   const src = logo?.dataset[theme === 'dark' ? 'darkSrc' : 'lightSrc'];
   if (logo && src && logo.getAttribute('src') !== src) {
