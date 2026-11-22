@@ -3,6 +3,7 @@ layout: post
 title:  "MeteoTrad"
 icon: "/assets/images/dev/meteotrad.png"
 subtitle: "An English/Spanish/Greek dictionary"
+stack: "PHP, MySQL"
 date: 2014-03-14
 link: http://meteotrad.com
 ---

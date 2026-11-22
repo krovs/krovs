@@ -1,0 +1,72 @@
+// Home page homelab drawing: devices, cables, LEDs and the details panel.
+.status-checked { margin: 0; color: var(--grey-light); font: .8rem/var(--line-height) var(--font-mono); }
+.homelab-scene { position: relative; margin: .5rem auto 0; max-width: 700px; }
+.homelab-scene svg { display: block; width: 100%; height: auto; overflow: visible; }
+.scene-furniture, .scene-device { fill: none; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 2; }
+.scene-furniture { stroke: var(--grey-light); }
+.scene-frame, .scene-door { fill: var(--pre); }
+.scene-opening { fill: var(--bg-color); }
+.scene-shelf { fill: var(--pre); }
+.scene-detail { opacity: .6; }
+.scene-connections { fill: none; stroke: var(--grey-light); stroke-width: 2; stroke-linecap: square; stroke-linejoin: round; pointer-events: none; }
+.scene-cable { opacity: .22; transition: opacity .2s ease, stroke .2s ease; }
+.scene-cable-tailnet { stroke-dasharray: 5 5; }
+.scene-tailnet-label { opacity: 0; fill: var(--text-color); stroke: var(--bg-color); stroke-width: 5px; stroke-linejoin: round; paint-order: stroke fill; text-anchor: middle; font: bold 11px var(--font-mono); pointer-events: none; transition: opacity .2s ease; }
+.scene-tailnet-label.is-highlighted { opacity: 1; }
+.scene-traffic { pointer-events: none; fill: var(--accent-secondary); }
+.scene-traffic .scene-traffic-outbound { fill: var(--yellow); }
+.scene-labels { pointer-events: none; }
+.scene-label { opacity: 0; fill: var(--text-color); stroke: var(--bg-color); stroke-width: 5px; stroke-linejoin: round; paint-order: stroke fill; text-anchor: middle; font: bold 12px var(--font-mono); transition: opacity .2s ease; }
+.scene-label.is-highlighted { opacity: 1; }
+.scene-details { position: absolute; top: 44%; left: min(80%, calc(100% - 9rem)); right: 0; padding: .4rem .5rem .2rem; border: 1px dashed var(--grey-light); color: var(--text-color); font: .72rem/1.2 var(--font-mono); pointer-events: none; }
+.scene-details-title { width: max-content; max-width: 100%; margin: 0; color: var(--accent-secondary); }
+.scene-details[hidden] { display: none; }
+.scene-details ul { margin: 0; padding: 0; list-style: none; }
+.scene-details li { width: max-content; max-width: 100%; margin: .15rem 0; }
+.scene-details li::before { content: '- '; color: var(--grey-light); }
+.homelab-scene svg[data-scene-active] .scene-cable { opacity: .1; }
+.homelab-scene svg[data-scene-active] .scene-cable.is-highlighted { opacity: 1; stroke: var(--accent-secondary); }
+.scene-cable.is-offline { stroke: var(--red); stroke-dasharray: 5 5; opacity: .6; }
+.homelab-scene svg[data-scene-active] .scene-cable.is-offline.is-highlighted { opacity: 1; stroke: var(--red); }
+.homelab-scene [data-scene-device]:focus-visible { outline: 2px solid var(--link-color); outline-offset: 4px; }
+.scene-device { stroke: var(--link-color); }
+.scene-device-fill { fill: var(--bg-color); }
+.scene-cloud { fill: var(--pre); stroke: var(--grey-light); }
+.scene-device[data-status="offline"], .scene-device[data-status="offline"] .scene-cloud { stroke: var(--red); transition: stroke .2s ease; }
+.scene-device text { fill: var(--text-color); stroke: none; text-anchor: middle; font: 11px var(--font-mono); }
+.scene-led { fill: var(--grey-light); stroke: none; opacity: .55; }
+.scene-router-power { fill: var(--grey-light); stroke: none; opacity: .55; }
+.scene-device[data-status="online"] .scene-router-power { fill: var(--sky); opacity: 1; }
+.scene-device[data-status="offline"] .scene-router-power { fill: none; stroke: var(--grey-light); opacity: .35; }
+.scene-pi-power { fill: var(--grey-light); stroke: none; opacity: .55; }
+.scene-device[data-status="online"] .scene-pi-power { fill: var(--red); opacity: 1; }
+  .scene-device[data-status="offline"] .scene-pi-power { fill: none; stroke: var(--grey-light); opacity: .35; }
+.scene-led-static { fill: var(--green); stroke: none; }
+.scene-hue-ring { fill: none; stroke: var(--blue); }
+.scene-device[data-scene-device="access-point"] .scene-led-static { animation: scene-ap-led 3s steps(1, end) infinite; }
+@keyframes scene-ap-led { 0%, 89%, 100% { opacity: 1; } 85% { opacity: .15; } }
+.scene-nas-power, .scene-nas-disk { fill: var(--grey-light); stroke: none; opacity: .55; }
+.scene-device[data-status="online"] .scene-nas-power { fill: var(--blue); opacity: 1; }
+.scene-device[data-status="online"] .scene-nas-disk { fill: var(--green); opacity: 1; }
+.scene-device[data-status="offline"] .scene-nas-power, .scene-device[data-status="offline"] .scene-nas-disk { fill: none; stroke: var(--grey-light); opacity: .35; }
+.scene-device[data-status="online"] .scene-nas-disk[data-led-dim], .scene-port-led[data-led-dim] { opacity: .2; }
+.scene-port-led { fill: var(--green); stroke: none; }
+.scene-device[data-hardware-check="router"] .scene-port-led { fill: var(--grey-light); opacity: .55; }
+.scene-device[data-hardware-check="router"][data-status="online"] .scene-port-led { fill: var(--green); opacity: 1; }
+.scene-device[data-hardware-check="router"][data-status="online"] .scene-port-led[data-led-dim] { opacity: .2; }
+.scene-device[data-hardware-check="router"][data-status="offline"] .scene-port-led { fill: none; stroke: var(--grey-light); opacity: .35; }
+.scene-device[data-status="online"] .scene-led { fill: var(--green); opacity: 1; animation: inline-led-activity 1.1s steps(1, end) infinite; }
+.scene-device[data-hardware-check="vps"] .scene-led, .scene-device[data-hardware-check="pi"] .scene-led { animation-delay: -.35s; }
+.scene-device[data-hardware-check="vps"] .scene-led-secondary { animation-delay: -.7s; }
+.scene-device[data-hardware-check="nuc"] .scene-led, .scene-device[data-hardware-check="nas"] .scene-led { animation-delay: -.7s; }
+.scene-device[data-status="offline"] .scene-led { fill: none; stroke: var(--grey-light); opacity: .35; }
+@media (max-width: 520px) {
+  .scene-device text { font-size: 13px; }
+  /* On touch screens the details read as command output under the drawing. */
+  .scene-details { position: static; width: max-content; max-width: 100%; margin: .75rem 0 0; padding: .4rem .6rem .3rem; font-size: .8rem; }
+  .scene-details[hidden] { display: block; border-width: 0; padding-inline: 0; }
+  .scene-details[hidden]::before { content: "# tap a device for details"; color: var(--grey-light); }
+}
+@media (prefers-reduced-motion: reduce) { .scene-device[data-status="online"] .scene-led { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .scene-device[data-scene-device="access-point"] .scene-led-static { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .scene-cable, .scene-label, .scene-tailnet-label { transition: none; } }

@@ -1,0 +1,126 @@
+---
+// Device names and health checks are public; the drawing is illustrative.
+// Shown in the details panel when a device is hovered, focused or tapped.
+const details: Record<string, string[]> = {
+  router: ["OPNsense", "firewall", "AdGuard Home", "DNS"],
+  nuc: ["Proxmox", "Talos k8s", "Forgejo", "Wazuh", "Home Assistant"],
+  pi: ["Docker", "Arcane", "Gatus"],
+  nas: ["Synology", "Garage", "Kopia"],
+  vps: ["Headscale", "Caddy", "Gatus"],
+  "access-point": ["Wi-Fi", "VLANs"],
+  switch: ["managed", "VLANs"],
+  hue: ["smart lighting"],
+  fiber: ["fiber uplink", "ONT"],
+};
+const detailsOf = (id: string) => details[id]?.join("|");
+---
+<figure class="homelab-scene" aria-label="Homelab devices in a shelving unit">
+  <svg viewBox="50 105 805 305" role="group" aria-label="Illustration of the homelab">
+    <desc>A shelving unit with a router, NUC, Raspberry Pi, NAS, Hue Bridge and switch. An access point sits on top, with the VPS shown in a cloud.</desc>
+
+    <!-- VPS: an illustrative cloud, not a physical device in the room. -->
+    <g class="scene-device" data-scene-device="vps" data-details={detailsOf("vps")} data-hardware-check="vps" data-hardware-label="vps" data-status="unknown" role="img" aria-label="vps: unknown" tabindex="0" transform="translate(120 115)">
+      <path class="scene-cloud" d="M502 83h132a25 25 0 0 0 0-50 35 35 0 0 0-64-10 29 29 0 0 0-53 11 25 25 0 0 0-15 49Z" />
+      <path d="M552 39h42v14h-42zm0 18h42v14h-42zM557 46h4m4 0h4M557 64h4m4 0h4m10 0h8" />
+      <rect class="scene-led scene-led-secondary" x="576" y="43" width="5" height="5" />
+      <rect class="scene-led" x="585" y="43" width="5" height="5" />
+    </g>
+
+    <!-- Kallax shelf. -->
+    <g class="scene-furniture" aria-hidden="true">
+      <path class="scene-frame" d="M125 161h410v214H125z" />
+      <path class="scene-opening" d="M141 177h378v182H141z" />
+      <path class="scene-shelf" d="M141 253h378v10H141z" />
+      <path class="scene-detail" d="M135 375v8m390-8v8" />
+    </g>
+
+    <g class="scene-furniture" data-scene-device="fiber" data-details={detailsOf("fiber")} data-hardware-label="fiber / ont" role="img" aria-label="Fibre wall outlet and cable" tabindex="0" transform="translate(0 -150)">
+      <rect class="scene-door" x="559" y="449" width="48" height="54" rx="2" />
+      <path d="M568 458h30v24h-30zM575 466h16v9h-16z" />
+    </g>
+
+    <g class="scene-connections" aria-hidden="true">
+      <path class="scene-cable" data-connects="fiber router" data-uplink="fiber" d="M583 325V338H570V345H545V185H224V206" />
+      <path class="scene-cable scene-cable-tailnet" data-connects="router vps" data-uplink="vps" d="M242 206V190H460V155H612" />
+      <path class="scene-cable" data-connects="router switch" d="M224 250V278H410V324" />
+      <path class="scene-cable" data-connects="nas switch" d="M363 342H355V315H285V342H277" />
+      <path class="scene-cable" data-connects="hue switch" d="M342 348H350V324H363" />
+      <path class="scene-cable" data-connects="nuc switch" d="M352 250V287H400V324" />
+      <path class="scene-cable" data-connects="pi switch" d="M458 250V297H430V324" />
+      <path class="scene-cable" data-connects="access-point switch" d="M330 159V185H500V297H475V324" />
+    </g>
+    <text class="scene-tailnet-label" data-scene-label="router vps" x="550" y="145" aria-hidden="true">tailnet</text>
+    <g class="scene-traffic" aria-hidden="true"></g>
+
+    <!-- Devices placed on top. -->
+    <g class="scene-device" data-scene-device="access-point" data-details={detailsOf("access-point")} data-hardware-label="access point" role="img" aria-label="access point: not monitored" tabindex="0" transform="translate(-20 0)">
+      <g transform="translate(-87.5 -39.75) scale(1.25)">
+        <path class="scene-device-fill" d="M289 146q8-12 61-12t61 12l-7 11q-54 5-108 0z" />
+        <path d="M296 141q54-8 108 0m-112 5q58-8 116 0m-114 5q56-7 112 0" />
+        <rect class="scene-led-static" x="341" y="153" width="18" height="3" />
+      </g>
+    </g>
+    <!-- Upper half of the open compartment. -->
+    <g class="scene-device" data-scene-device="router" data-details={detailsOf("router")} data-hardware-check="router" data-hardware-label="router" data-status="unknown" role="img" aria-label="router: unknown" tabindex="0" transform="translate(14 0)">
+      <g transform="translate(21 25) scale(.9)">
+        <path class="scene-device-fill" d="M144 218h131v32H144z" />
+        <path d="M150 218v-17m8 17v-17m8 17v-17m8 17v-17m8 17v-17m8 17v-17m8 17v-17m8 17v-17m8 17v-17m8 17v-17m8 17v-17m8 17v-17m8 17v-17m8 17v-17m8 17v-17" />
+        <path d="M151 228h14v12h-14zm19 0h14v12h-14zm19 0h14v12h-14zm19 0h14v12h-14zm19 0h14v12h-14zM192 231h8m11 0h8m11 0h8" />
+        <rect class="scene-port-led" data-router-port-led x="158" y="230" width="5" height="4" />
+        <rect class="scene-port-led" data-router-port-led x="177" y="230" width="5" height="4" />
+        <rect class="scene-router-power" x="255" y="232" width="7" height="7" />
+      </g>
+    </g>
+    <g class="scene-device" data-scene-device="nuc" data-details={detailsOf("nuc")} data-hardware-check="nuc" data-hardware-label="nuc" data-status="unknown" role="img" aria-label="nuc: unknown" tabindex="0" transform="translate(19 0)">
+      <path class="scene-device-fill" d="M294 210h78q6 0 6 6v28q0 6-6 6h-78q-6 0-6-6v-28q0-6 6-6z" />
+      <path d="M295 214h76M297 223h72v20h-72zM302 229h13v7h-13zm18 0h13v7h-13zm19 3h2m17-4h8v10h-8z" />
+      <rect class="scene-led" x="359.5" y="230.5" width="5" height="5" />
+    </g>
+    <g class="scene-device" data-scene-device="pi" data-details={detailsOf("pi")} data-hardware-check="pi" data-hardware-label="pi" data-status="unknown" role="img" aria-label="pi: unknown" tabindex="0" transform="translate(14 0)">
+      <g transform="translate(124.32 70) scale(.72)">
+        <path class="scene-device-fill" d="M392 238h104v12H392zM398 214h20v24h-20zm25 0h20v24h-20zm40-4h25v28h-25z" />
+        <path d="M401 218h14v6h-14zm0 10h14v6h-14zm25-10h14v6h-14zm0 10h14v6h-14zm40-14h19v18h-19zM470 218h11m-11 4h11m-11 4h11" />
+        <rect class="scene-led" x="444" y="241" width="6" height="6" />
+        <rect class="scene-pi-power" x="454" y="241" width="6" height="6" />
+      </g>
+    </g>
+
+    <!-- Lower half of the open compartment. -->
+    <g class="scene-device" data-scene-device="nas" data-details={detailsOf("nas")} data-hardware-check="nas" data-hardware-label="nas" data-status="unknown" role="img" aria-label="nas: unknown" tabindex="0" transform="translate(5 18)">
+      <g transform="translate(-16.8 -27.04) scale(1.08)">
+        <path class="scene-device-fill" d="M151 269h116v69H151z" />
+        <path d="M160 278h42v45h-42zm50 0h42v45h-42zM166 283v34m50-34v34" />
+        <rect class="scene-nas-power" x="160" y="329" width="5" height="5" />
+        <rect class="scene-nas-disk" data-nas-disk-led x="225" y="329" width="5" height="5" />
+        <rect class="scene-nas-disk" data-nas-disk-led x="233" y="329" width="5" height="5" />
+        <rect class="scene-nas-disk" data-nas-disk-led x="241" y="329" width="5" height="5" />
+        <rect class="scene-nas-disk" data-nas-disk-led x="249" y="329" width="5" height="5" />
+      </g>
+    </g>
+    <g class="scene-device" data-scene-device="hue" data-details={detailsOf("hue")} data-hardware-label="hue bridge" role="img" aria-label="hue bridge: not monitored" tabindex="0">
+      <rect class="scene-device-fill" x="298" y="340" width="44" height="16" rx="3" />
+      <ellipse class="scene-hue-ring" cx="320" cy="340" rx="10" ry="2" />
+    </g>
+    <g class="scene-device" data-scene-device="switch" data-details={detailsOf("switch")} data-hardware-label="switch" role="img" aria-label="switch: not monitored" tabindex="0" transform="translate(0 18)">
+      <path class="scene-device-fill" d="M363 306h146v32H363z" />
+      <path d="M380 314h11v9h-11zm16 0h11v9h-11zm16 0h11v9h-11zm16 0h11v9h-11zm16 0h11v9h-11zm16 0h11v9h-11zm16 0h11v9h-11zm16 0h11v9h-11zM383 317v3m16-3v3m16-3v3m16-3v3m16-3v3m16-3v3m16-3v3m16-3v3" />
+      <rect class="scene-led-static" x="368" y="328" width="5" height="4" />
+      {[383, 399, 415, 431, 447, 463, 479, 495].map((x) => <rect class="scene-port-led" data-switch-port-led x={x} y="314" width="3" height="3" />)}
+    </g>
+    <g class="scene-labels" aria-hidden="true">
+      <text class="scene-label" data-scene-label="vps" x="693" y="213">vps</text>
+      <text class="scene-label" data-scene-label="access-point" x="330" y="118">access point</text>
+      <text class="scene-label" data-scene-label="router" x="194" y="197">router</text>
+      <text class="scene-label" data-scene-label="nuc" x="352" y="201">nuc</text>
+      <text class="scene-label" data-scene-label="pi" x="458" y="212">pi</text>
+      <text class="scene-label" data-scene-label="nas" x="214" y="371">nas</text>
+      <text class="scene-label" data-scene-label="hue" x="320" y="371">hue bridge</text>
+      <text class="scene-label" data-scene-label="switch" x="436" y="371">switch</text>
+      <text class="scene-label" data-scene-label="fiber" x="595" y="290">fiber / ont</text>
+    </g>
+  </svg>
+  <div class="scene-details" data-scene-details hidden aria-hidden="true"><p class="scene-details-title" data-scene-details-title></p><ul></ul></div>
+  <span class="sr-only" id="scene-device-description"></span>
+</figure>
+
+

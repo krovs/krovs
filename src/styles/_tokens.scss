@@ -1,0 +1,50 @@
+// Theme tokens: dark by default, light via html[data-theme="light"].
+:root {
+  color-scheme: dark;
+  --line-height: 1.3rem;
+  --grid-height: .65rem;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --bg-color: #24273a;
+  --text-color: #cad3f5;
+  --link-color: #8be9fd;
+  --accent-secondary: #ff5ccd;
+  --visited: #c6a0f6;
+  --grey-light: #939ab7;
+  --pre: #1e2030;
+  --code: #494d64;
+  --green: #a6da95;
+  --red: #ed8796;
+  --yellow: #eed49f;
+  --sky: #04a5e5;
+  --blue: #1e66f5;
+  --muted: #b8c0e0;
+  --quote-bg: #363a4f;
+  --glitch-a: #8be9fd;
+  --glitch-b: #ed8796;
+  --social-github: #eed49f;
+  --social-linkedin: #7dc4e4;
+  --social-hackthebox: #a6da95;
+  --social-tryhackme: #ed8796;
+}
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg-color: #eff1f5;
+  --text-color: #4c4f69;
+  --link-color: #0075a8;
+  --accent-secondary: #b41a80;
+  --visited: #8839ef;
+  --grey-light: #6c6f85;
+  --pre: #e6e9ef;
+  --code: #bcc0cc;
+  --green: #40a02b;
+  --red: #d20f39;
+  --yellow: #8a6100;
+  --sky: #0075a8;
+  --blue: #1e66f5;
+  --muted: #5c5f77;
+  --quote-bg: #ccd0da;
+  --social-github: #8a6100;
+  --social-linkedin: #096b99;
+  --social-hackthebox: #237a28;
+  --social-tryhackme: #ad3152;
+}

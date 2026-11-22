@@ -1,0 +1,50 @@
+---
+import { diagramIconSymbols } from "../diagrams/icons.mjs";
+import { topologyEdges, topologyNodes } from "../diagrams/topology";
+// Each service row reuses a healthchecks badge key from healthchecks-config.ts.
+const services = [
+  { name: "hypervisor", check: "nuc" },
+  { name: "kubernetes", check: "kubernetes" },
+  { name: "security", check: "security" },
+  { name: "storage", check: "nas" },
+  { name: "dns", check: "dns" },
+  { name: "git", check: "git" },
+];
+---
+<div class="homelab-overview">
+  <section class="topology" aria-label="Homelab topology">
+    <svg class="topology-map" viewBox="111.5 0 377 280" role="img" aria-labelledby="topology-title topology-desc">
+      <title id="topology-title">Homelab topology</title>
+      <desc id="topology-desc">Illustrative topology connecting the internet to the router and VPS, linked by a tailnet, and the switch to the access point, NAS, Pi and NUC.</desc>
+      <path class="topology-edge" d="M300 130 V205" aria-hidden="true" />
+      {topologyEdges.map((edge) => (
+        <g data-edge-from={edge.from} data-edge-to={edge.to} data-tailnet={edge.tailnet ? "" : undefined}>
+          <path data-edge-path data-online-path={edge.path} data-offline-path={edge.broken} class={edge.tailnet ? "topology-tailnet" : "topology-edge"} d={edge.path} />
+          <path data-edge-cross class="topology-offline" d={edge.cross} style="display: none" aria-label={`${edge.from} to ${edge.to} offline`} />
+        </g>
+      ))}
+      <text class="topology-tailnet-label" x="305" y="92">tailnet</text>
+      <g class="topology-traffic" aria-hidden="true"></g>
+      <defs set:html={diagramIconSymbols} />
+      <g class="topology-nodes">
+        {topologyNodes.map((node) => (
+          <g data-node={node.id} data-check={node.check} data-status={node.check ? "unknown" : "online"} transform={`translate(${node.x} ${node.y})`}>
+            <use href={`#node-${node.icon}`} x="-10" y={node.iconY ?? -10} width="20" height="20" />
+            {node.led && <rect class="topology-power-led" x={node.led.x} y={node.led.y} width="2.5" height="2.5" aria-hidden="true" />}
+            <text x={node.label.x} y={node.label.y} class={node.label.anchor && `label-${node.label.anchor}`}>{node.id}</text>
+          </g>
+        ))}
+      </g>
+    </svg>
+  </section>
+  <section class="homelab-status" aria-label="Services">
+    <ul class="status-list" aria-label="Service statuses">
+      {services.map((service) => (
+        <li>
+          <span>{service.name}</span>
+          <span class="status-badge status-unknown" data-service-check={service.check}><span class="status-dot" aria-hidden="true"></span><span class="status-fan-wrapper" aria-hidden="true"><svg class="status-fan" viewBox="0 0 16 16"><use href="#node-fan" /></svg></span> <span data-status-text>[unknown]</span></span>
+        </li>
+      ))}
+    </ul>
+  </section>
+</div>

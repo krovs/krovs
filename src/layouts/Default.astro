@@ -3,28 +3,23 @@ import Head from "../components/Head.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.scss";
-import "../styles/particles.scss";
-
-export interface Props {
-  title?: string;
-  description?: string;
-  nav?: string;
-  canonical?: string;
-}
-
+export interface Props { title?: string; description?: string; nav?: string; canonical?: string; }
 const { title, description, nav, canonical } = Astro.props;
 ---
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" transition:animate="none">
   <Head title={title} description={description} nav={nav} canonical={canonical} />
-  <body class={nav === "home" ? "home-page" : undefined}>
-    <div class="pixel-rail pixel-rail-left" aria-hidden="true"></div>
-    <div class="pixel-rail pixel-rail-right" aria-hidden="true"></div>
-    <main>
+  <body>
+    <div class="site">
       <Header nav={nav} />
-      <slot />
-    </main>
-    <Footer />
+      <main><slot /></main>
+      <Footer />
+    </div>
   </body>
 </html>
+
+<script>
+  import "../scripts/theme-switch";
+  import "../scripts/post-image-zoom";
+  import "../scripts/terminal-intro";
+</script>

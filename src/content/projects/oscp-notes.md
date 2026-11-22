@@ -3,6 +3,7 @@ layout: post
 title:  "OSCP/eCPPTv3 Exam Notes"
 icon: "/assets/images/dev/oscp.png"
 subtitle: "My OSCP and eCPPTv3 Exam Notes"
+stack: "MkDocs"
 date: 2025-06-19
 link: "https://krovs.github.io/oscp-notes/"
 ---

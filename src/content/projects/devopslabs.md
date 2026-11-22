@@ -4,6 +4,7 @@ title:  "DevOpsLabs"
 icon: "/assets/images/dev/potion.png"
 subtitle: "DevOps mental notes as exercises"
 date: 2026-05-30
+stack: "Svelte" 
 link: "https://krovs.github.io/devopslabs/"
 ---
 

@@ -1,43 +1,27 @@
 ---
-import Icon from "./Icon.astro";
-
-export interface Props {
-  nav?: string;
-}
+export interface Props { nav?: string; }
 const { nav } = Astro.props;
 ---
-
-<a href="#light" id="theme-switch" aria-label="Switch theme" class="contrast">
+<a transition:persist="minimal-theme-switch" href="#light" id="theme-switch" aria-label="Switch theme" class="contrast">
   <span class="icon-sun">
-    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M13 0h-2v4h2zM0 11v2h4v-2zm24 0v2h-4v-2zM13 24h-2v-4h2zM8 6h8v2H8zM6 8h2v8H6zm2 10v-2h8v2zm10-2h-2V8h2zm2-14h2v2h-2zm0 2v2h-2V4zm2 18h-2v-2h2zm-2-2h-2v-2h2zM4 2H2v2h2v2h2V4H4zM2 22h2v-2h2v-2H4v2H2z"/></svg>
+    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"><path fill="currentColor" d="M18.362 3.202a2.936 2.936 0 0 0-4.724 0a2.94 2.94 0 0 1-3.25 1.055a2.936 2.936 0 0 0-3.822 2.778a2.94 2.94 0 0 1-2.008 2.763a2.936 2.936 0 0 0-1.46 4.494a2.94 2.94 0 0 1 0 3.416a2.936 2.936 0 0 0 1.46 4.494a2.94 2.94 0 0 1 2.008 2.763a2.936 2.936 0 0 0 3.823 2.778a2.94 2.94 0 0 1 3.249 1.055a2.936 2.936 0 0 0 4.724 0a2.94 2.94 0 0 1 3.25-1.055a2.936 2.936 0 0 0 3.822-2.778a2.94 2.94 0 0 1 2.008-2.763a2.936 2.936 0 0 0 1.46-4.494a2.94 2.94 0 0 1 0-3.416a2.936 2.936 0 0 0-1.46-4.494a2.94 2.94 0 0 1-2.008-2.763a2.936 2.936 0 0 0-3.823-2.778a2.94 2.94 0 0 1-3.249-1.055m-7.594 21.86c-5.005-2.89-6.72-9.29-3.83-14.294s9.29-6.72 14.294-3.83s6.72 9.29 3.83 14.294s-9.29 6.72-14.294 3.83"/></svg>
   </span>
-  <span class="icon-moon" style="display:none;">
-    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18 22H8v-2h10zM8 20H6v-2h2zm12 0h-2v-2h2zM6 18H4v-2h2zm16 0h-2v-4h-2v-2h2v-2h2zM4 16H2V6h2zm14 0h-6v-2h6zm-6-2h-2v-2h2zm-2-2H8V6h2zM6 6H4V4h2zm8-2h-2v2h-2V4H6V2h8z"/></svg>
+  <span class="icon-moon">
+    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1024 1024"><path fill="currentColor" d="M512 1024q-104 0-199-40.5t-163.5-109T40.5 711T0 512t40.5-199t109-163.5T313 40.5T512 0t199 40.5t163.5 109t109 163.5t40.5 199t-40.5 199t-109 163.5t-163.5 109t-199 40.5m0-960q-91 0-174 35.5T195 195T99.5 338T64 512t35.5 174T195 829t143 95.5T512 960t174-35.5T829 829t95.5-143T960 512t-35.5-174T829 195T686 99.5T512 64"/></svg>
   </span>
 </a>
 
-{nav && (
-  <nav class="desktop-nav">
-    <ul></ul>
-    <ul>
-      <li><a href="/" class="secondary">/home</a></li>
-      <li><a href="/projects" class="secondary">/projects</a></li>
-      <li><a href="/homelab" class="secondary">/homelab</a></li>
-      <li><a href="https://krovs.github.io/seclogs/" class="secondary"><span>/seclogs</span> <Icon name="fa6-solid-up-right-from-square" class="i1" /></a></li>
-    </ul>
-    <ul></ul>
+<header class="site-header">
+  <a class="site-name" href="/"><video transition:persist="minimal-logo" id="logo-video" class="site-logo" src="/assets/images/darkme.webm" data-dark-src="/assets/images/darkme.webm" data-light-src="/assets/images/lightme.webm" width="48" height="48" autoplay muted loop playsinline aria-hidden="true"></video><span id="minimal-name" class="header-glitch" data-text="krovs" transition:persist="minimal-name" aria-hidden="true">krovs</span><span class="sr-only">krovs</span></a>
+  <p>devops, homelab &amp; infosec</p>
+  <nav aria-label="Main navigation">
+    <a href="/" aria-current={nav === "home" ? "page" : undefined}>home</a>
+    <a href="/projects" aria-current={nav === "projects" ? "page" : undefined}>projects</a>
+    <a href="/homelab" aria-current={nav === "homelab" ? "page" : undefined}>homelab</a>
+    <a href="https://krovs.github.io/seclogs/" target="_blank" rel="noopener noreferrer" aria-label="seclogs (opens in a new tab)">seclogs↗</a>
   </nav>
+</header>
 
-  <details class="mobile-nav">
-    <summary aria-label="Open navigation">
-      <svg class="mobile-nav-icon" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20 18H4v-2h16zm0-5H4v-2h16zm0-5H4V6h16z"/></svg>
-      <span class="mobile-nav-sr-only">Open navigation</span>
-    </summary>
-    <ul>
-      <li><a href="/" class="secondary">/home</a></li>
-      <li><a href="/projects" class="secondary">/projects</a></li>
-      <li><a href="/homelab" class="secondary">/homelab</a></li>
-      <li><a href="https://krovs.github.io/seclogs/" class="secondary">/seclogs <Icon name="fa6-solid-up-right-from-square" class="i1" /></a></li>
-    </ul>
-  </details>
-)}
+<script>
+  import "../scripts/name-glitch";
+</script>

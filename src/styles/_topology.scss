@@ -1,0 +1,58 @@
+// Homelab page: topology map and service status list.
+.homelab-status { margin: 0 0 2.6rem; }
+.homelab-overview { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 2rem; align-items: stretch; }
+.homelab-live { margin: 2rem 0 3rem; }
+.posttext .homelab-live .status-list { list-style: none; padding-left: 0; }
+.posttext .homelab-live .status-list li { margin: 0; }
+.topology { margin: 0 0 2.6rem; }
+.homelab-overview .homelab-status { display: flex; flex-direction: column; }
+.homelab-overview .status-list li:last-child { padding-bottom: 0; transform: translateY(.35rem); }
+.homelab-overview .status-list { flex: 1; width: 100%; grid-template-columns: 1fr; align-content: space-between; max-width: 230px; margin: .6rem 0 .6rem auto; }
+.topology-map { display: block; width: 100%; max-width: 405px; height: auto; margin: 0 auto; overflow: visible; }
+.topology-edge { fill: none; stroke: var(--grey-light); stroke-width: 2; }
+.topology-offline-edge { fill: none; stroke: var(--red); stroke-width: 2; stroke-dasharray: 4 4; }
+.topology-offline { fill: none; stroke: var(--red); stroke-width: 2; stroke-linecap: square; }
+.topology-tailnet { fill: none; stroke: var(--grey-light); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.topology-tailnet-label { fill: var(--grey-light); text-anchor: middle; font: 11px var(--font-mono); }
+.topology-traffic { fill: var(--accent-secondary); }
+.topology-traffic-outbound { fill: var(--yellow); }
+@media (prefers-reduced-motion: reduce) { .topology-traffic { display: none; } }
+.topology-nodes use { color: var(--link-color); fill: var(--bg-color); stroke: currentColor; stroke-width: 1.5; stroke-linecap: square; stroke-linejoin: round; }
+.topology-nodes [data-node="ap"][data-signal="1"] use { --wifi-middle: .2; --wifi-outer: .2; }
+.topology-nodes [data-node="ap"][data-signal="2"] use { --wifi-outer: .2; }
+.topology-power-led { fill: var(--accent-secondary); opacity: 1; }
+.topology-nodes [data-status="online"] .topology-power-led { opacity: 1; animation: inline-led-activity 1.1s steps(1, end) infinite; }
+.topology-nodes [data-node="vps"] .topology-power-led, .topology-nodes [data-node="nas"] .topology-power-led { animation-delay: -.9s; }
+.topology-nodes [data-node="switch"] .topology-power-led, .topology-nodes [data-node="nuc"] .topology-power-led { animation-delay: -1.8s; }
+.topology-nodes [data-status="offline"] .topology-power-led { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .topology-nodes .topology-power-led { animation: none !important; } }
+.topology-nodes .topology-node-offline use { color: var(--red); }
+.topology-nodes text { fill: var(--text-color); text-anchor: middle; font: 12.44px var(--font-mono); }
+.topology-nodes .label-start { text-anchor: start; }
+.topology-nodes .label-end { text-anchor: end; }
+.status-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 0 4rem; list-style: none; margin: 0; padding: 0; }
+.status-list li { display: grid; grid-template-columns: auto minmax(0, 1fr) 9ch; align-items: baseline; column-gap: .4rem; margin: 0; padding: .35rem 0; }
+.status-list li::after { content: ""; grid-column: 2; grid-row: 1; align-self: center; margin-left: .6rem; height: 1px; background: repeating-linear-gradient(to left, var(--status-line-color, var(--link-color)) 0 3px, transparent 3px 5px); opacity: .25; }
+.status-list li > .status-badge { grid-column: 3; grid-row: 1; justify-self: end; width: 9ch; text-align: left; }
+.status-list li:has(.status-offline)::after { --status-line-color: var(--red); }
+.status-badge { font-size: .8rem; white-space: nowrap; }
+.status-online { color: var(--green); }
+.status-dot { position: relative; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: currentColor; vertical-align: middle; }
+.status-fan-wrapper { display: none; position: relative; width: 8px; height: 8px; vertical-align: middle; }
+.status-fan { display: block; width: 100%; height: 100%; fill: currentColor; }
+.status-online .status-dot { display: none; }
+.status-online .status-fan-wrapper { display: inline-block; }
+.status-online .status-fan { animation: inline-fan-spin .25s linear infinite; }
+.status-online .status-fan-wrapper::after { content: ""; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; border: 1px solid currentColor; border-radius: 50%; transform: translate(-50%, -50%) scale(1); animation: status-pulse 2s ease-out infinite; pointer-events: none; }
+@keyframes status-pulse { 0% { opacity: .8; transform: translate(-50%, -50%) scale(1); } 80%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(3); } }
+@media (prefers-reduced-motion: reduce) { .status-online .status-fan { animation: none; } .status-online .status-fan-wrapper::after { animation: none; display: none; } }
+.status-offline { color: var(--red); }
+.status-unknown { color: var(--grey-light); }
+.topology-nodes [data-status="unknown"] use { color: var(--grey-light); }
+@media (max-width: 520px) {
+  .homelab-overview { grid-template-columns: 1fr; gap: 0; }
+  .homelab-overview .status-list { flex: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2rem; max-width: none; margin: 0; }
+  .homelab-overview .status-list li { grid-template-columns: auto minmax(0, 1fr) auto; column-gap: .3rem; }
+  .homelab-overview .status-list li:last-child { padding-bottom: .35rem; transform: none; }
+  .topology-map { width: 100%; }
+}

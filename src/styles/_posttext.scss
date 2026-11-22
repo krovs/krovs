@@ -1,0 +1,28 @@
+// Long-form content (project posts, homelab page) and the image zoom dialog.
+.posttext { font-size: 1.0625rem; line-height: 1.75; overflow-wrap: break-word; }
+.posttext p { margin: 1.15em 0; }
+.posttext h1, .posttext h2, .posttext h3, .posttext h4 { line-height: 1.3; }
+.posttext h1, .posttext h2, .posttext h3, .posttext h4 { text-decoration: underline; text-decoration-color: var(--accent-secondary); text-decoration-thickness: 1px; text-underline-offset: .2em; }
+.posttext ul, .posttext ol { padding-left: 1.5em; list-style-position: outside; }
+.posttext li { margin: .35em 0; }
+.posttext pre { line-height: 1.55; }
+.posttext .homelab-diagram { margin: 1.5rem 0 2rem; padding: .75rem 1rem .5rem; }
+.homelab-diagram figcaption { display: none; }
+.homelab-diagram > svg { display: block; width: 100%; max-width: 405px; height: auto; margin: 0 auto; overflow: visible; }
+.homelab-diagram .diagram-line { fill: none; stroke: var(--grey-light); stroke-width: 1.5; }
+.homelab-diagram .diagram-line-dashed { stroke-dasharray: 4 4; }
+.homelab-diagram .diagram-node svg { color: var(--link-color); fill: var(--bg-color); stroke: currentColor; stroke-width: 1.5; stroke-linecap: square; stroke-linejoin: round; }
+.homelab-diagram .diagram-node text { fill: var(--text-color); stroke: var(--bg-color); stroke-width: 5px; stroke-linejoin: round; paint-order: stroke fill; text-anchor: middle; font: var(--diagram-label-size) var(--font-mono); }
+.homelab-diagram .diagram-traffic { fill: var(--accent-secondary); }
+@media (prefers-reduced-motion: reduce) { .homelab-diagram .diagram-traffic { display: none; } }
+@media (max-width: 520px) {
+  .posttext .homelab-diagram { padding-inline: .5rem; }
+}
+.posttext img { max-width: 100%; height: auto; border: 1px solid var(--grey-light); }
+.posttext img[data-zoomable] { cursor: zoom-in; }
+.posttext img[data-zoomable]:focus-visible { outline: 2px solid var(--link-color); outline-offset: 3px; }
+.post-image-zoom { max-width: 100vw; max-height: 100dvh; padding: 2.5rem 1rem 1rem; border: 0; background: transparent; overflow: visible; }
+.post-image-zoom::backdrop { background: rgb(0 0 0 / .88); }
+.post-image-zoom img { display: block; max-width: min(100%, 95vw); max-height: calc(100dvh - 4rem); width: auto; height: auto; object-fit: contain; }
+.post-image-zoom button { position: absolute; top: .25rem; right: .5rem; border: 0; background: transparent; color: #fff; font-size: 1.75rem; line-height: 1; cursor: pointer; }
+.post-image-zoom button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
